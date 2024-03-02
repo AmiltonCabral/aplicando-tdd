@@ -70,6 +70,7 @@ public class ProcessadorBoletosTest {
         assertFalse(fatura.isPaga());
     }
 
+    @Test
     void testProcessamentoBoletosListaVaziaGratis() {
         Fatura fatura = new Fatura("Cliente Teste", 0.00, LocalDate.now());
 
