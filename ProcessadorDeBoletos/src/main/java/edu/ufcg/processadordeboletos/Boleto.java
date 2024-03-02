@@ -16,4 +16,8 @@ public class Boleto {
     public double getValorPago() {
         return this.valorPago;
     }
+
+    public LocalDate getDataPagamento() {
+        return this.data;
+    }
 }
