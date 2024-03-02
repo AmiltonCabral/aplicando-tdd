@@ -16,4 +16,8 @@ public class Pagamento {
     public String getTipoPagamento() {
         return this.tipoPagamento;
     }
+
+    public double getValorPago() {
+        return this.valorPago;
+    }
 }
