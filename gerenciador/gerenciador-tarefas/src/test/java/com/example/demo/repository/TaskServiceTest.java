@@ -1,5 +1,9 @@
-package com.example.demo.service;
+package com.example.demo.repository;
 
+import com.example.demo.domain.Priority;
+import com.example.demo.domain.Status;
+import com.example.demo.domain.Task;
+import com.example.demo.service.TaskService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -67,10 +71,10 @@ public class TaskServiceTest {
 
     @Test
     public void updateSuccess() {
-        when(taskRepository.save(task)).thenReturn(new Task("2", "Teste UPDATE", "Teste descricao UPDATE", Priority.LOW, Status.TO_DO, LocalDate.of(1,1,1), LocalDate.of(1,1,1)));
+        when(taskRepository.findById("1")).thenReturn(Optional.ofNullable(task));
+        when(taskRepository.save(task)).thenReturn(new Task("1", "Teste UPDATE", "Teste descricao UPDATE", Priority.LOW, Status.TO_DO, LocalDate.of(1,1,1), LocalDate.of(1,1,1)));
 
         Task taskUpdate = taskService.update(task);
-
 
         assertEquals(taskUpdate.getId(), "1");
         assertEquals(taskUpdate.getTitle(), "Teste UPDATE");
@@ -85,9 +89,9 @@ public class TaskServiceTest {
     @Test
     public void deleteByIdSuccess() {
 
-        List<Task> tasks = List.of(task, new Task("2", "Teste Titulo 2", "Teste descricao 2", Priority.MEDIUM, Status.TO_DO, LocalDate.now(), LocalDate.now()));
+        taskService = mock(TaskService.class);
 
-        taskService = mock(Taskservice.class);
+        when(taskRepository.deleteById("1")).thenCallRealMethod();
 
         verify(taskService, times(1)).deleteById("1");
 
